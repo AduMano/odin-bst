@@ -5,3 +5,4 @@ require_relative('lib/tree')
 
 # Initialize
 tree = Tree.new
+tree.pretty_print
