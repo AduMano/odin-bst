@@ -2,7 +2,7 @@
 
 # Comparable Modules
 module Comparable
-  def comparable(node)
+  def compare_nodes(node)
     node
   end
 end

@@ -1,11 +1,24 @@
 # frozen_string_literal: true
 
 require_relative('node')
+require_relative('modules/helper')
 
 # Class Tree
 class Tree
+  include ArrayHelper
+  include SortHelper
+
   def initialize
-    @root = Node.new(5, Node.new(3, Node.new(2), Node.new(4)), Node.new(8, Node.new(7), Node.new(9)))
+    @root = nil
+  end
+
+  def build_tree(list)
+    return nil if list.empty?
+
+    unique_list = elim_duplicates(list)
+    sorted_list = merge_sort(unique_list)
+
+    @root = balance_tree(sorted_list, 0, sorted_list.length - 1)
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true) # rubocop:disable Style/OptionalBooleanParameter
@@ -14,5 +27,19 @@ class Tree
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
+  end
+
+  private
+
+  def balance_tree(list, front, back)
+    return nil if front > back
+
+    mid = ((front + back) / 2).floor
+    root = Node.new(list[mid])
+
+    root.left = balance_tree(list, front, mid - 1)
+    root.right = balance_tree(list, mid + 1, back)
+
+    root
   end
 end
