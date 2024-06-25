@@ -80,7 +80,11 @@ class Tree
   end
 
   def find(data)
-    list_has?(inorder, data)
+    inorder do |node|
+      return true if node.data.eql?(data)
+    end
+
+    false
   end
 
   def rebalance
