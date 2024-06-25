@@ -25,7 +25,7 @@ class Tree
   end
 
   def insert(data, new_node = Node.new(data), root = @root)
-    return false if find(data)
+    return false if find(data).eql?(true)
     return @root = new_node if root.nil?
 
     if compare_nodes(data, root)
@@ -80,11 +80,7 @@ class Tree
   end
 
   def find(data)
-    inorder do |node|
-      return true if node.data.eql?(data)
-    end
-
-    false
+    list_has?(inorder, data)
   end
 
   def rebalance
