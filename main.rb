@@ -44,3 +44,63 @@ tree.pretty_print
 puts "\nPre-Order: #{tree.preorder.to_s.colorize(:yellow)}"
 puts "In-Order: #{tree.inorder.to_s.colorize(:yellow)}"
 puts "Post-Order: #{tree.postorder.to_s.colorize(:yellow)}"
+
+print "\nDeleting Leaf Node 11: "
+puts "Node #{tree.delete(11).data} deleted."
+
+puts "\nTree: "
+tree.pretty_print
+
+puts "\nPre-Order: #{tree.preorder.to_s.colorize(:yellow)}"
+puts "In-Order: #{tree.inorder.to_s.colorize(:yellow)}"
+puts "Post-Order: #{tree.postorder.to_s.colorize(:yellow)}"
+
+print "\nDeleting Node with 1 Child 0: "
+puts "Node #{tree.delete(0).data} deleted."
+
+puts "\nTree: "
+tree.pretty_print
+
+puts "\nPre-Order: #{tree.preorder.to_s.colorize(:yellow)}"
+puts "In-Order: #{tree.inorder.to_s.colorize(:yellow)}"
+puts "Post-Order: #{tree.postorder.to_s.colorize(:yellow)}"
+
+print "\nDeleting Node with 1 Child 12: "
+puts "Node #{tree.delete(12).data} deleted."
+
+puts "\nTree: "
+tree.pretty_print
+
+puts "\nPre-Order: #{tree.preorder.to_s.colorize(:yellow)}"
+puts "In-Order: #{tree.inorder.to_s.colorize(:yellow)}"
+puts "Post-Order: #{tree.postorder.to_s.colorize(:yellow)}"
+
+print "\nDeleting Node with both Child (Node 2): "
+puts "Node #{tree.delete(2).data} deleted."
+
+puts "\nTree: "
+tree.pretty_print
+
+puts "\nPre-Order: #{tree.preorder.to_s.colorize(:yellow)}"
+puts "In-Order: #{tree.inorder.to_s.colorize(:yellow)}"
+puts "Post-Order: #{tree.postorder.to_s.colorize(:yellow)}"
+
+print "\nDeleting Node with both Child (Node 10): "
+puts "Node #{tree.delete(10).data} deleted."
+
+puts "\nTree: "
+tree.pretty_print
+
+puts "\nPre-Order: #{tree.preorder.to_s.colorize(:yellow)}"
+puts "In-Order: #{tree.inorder.to_s.colorize(:yellow)}"
+puts "Post-Order: #{tree.postorder.to_s.colorize(:yellow)}"
+
+print "\nDeleting Node with both Child (Node 13): "
+puts "Node #{tree.delete(13).data} deleted."
+
+puts "\nTree: "
+tree.pretty_print
+
+puts "\nPre-Order: #{tree.preorder.to_s.colorize(:yellow)}"
+puts "In-Order: #{tree.inorder.to_s.colorize(:yellow)}"
+puts "Post-Order: #{tree.postorder.to_s.colorize(:yellow)}"

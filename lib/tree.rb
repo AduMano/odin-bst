@@ -24,18 +24,43 @@ class Tree
     true
   end
 
-  def insert(data, new_node = Node.new(data), root = @root)
-    return false if find(data).eql?(true)
+  def insert(data, new_node = Node.new(data, nil, nil, nil), root = @root)
     return @root = new_node if root.nil?
+    return false unless find(data).eql?(false)
 
     if compare_nodes(data, root)
-      return root.right = new_node if root.right.nil?
+      if root.right.nil?
+        new_node.parent = root
+        return root.right = new_node
+      end
 
       insert(data, new_node, root.right)
     else
-      return root.left = new_node if root.left.nil?
+      if root.left.nil?
+        new_node.parent = root
+        return root.left = new_node
+      end
 
       insert(data, new_node, root.left)
+    end
+  end
+
+  def delete(data)
+    node = find(data)
+    return false if node.eql?(false)
+
+    if node.left.nil? && node.right.nil?
+      # If its a leaf node (No Children or Nil nodes for left and right)
+      puts 'With 0 Child'.colorize(:red)
+      delete_leaf(data, node)
+    elsif node.left.nil? ^ node.right.nil?
+      # If theres only one child (exclusive or, cant be both true)
+      puts 'With 1 Child'.colorize(:red)
+      delete_node_with_child(data, node)
+    else
+      # If node has children both side
+      puts 'With 2 Child'.colorize(:red)
+      delete_node_with_children(data, node)
     end
   end
 
@@ -80,11 +105,11 @@ class Tree
   end
 
   def find(data)
-    inorder do |node|
-      return true if node.data.eql?(data)
+    node = preorder do |node|
+      return node if node.data.eql?(data)
     end
 
-    false
+    node.eql?(nil) ? false : node
   end
 
   def rebalance
@@ -104,15 +129,64 @@ class Tree
 
   private
 
-  def balance_tree(list, front, back)
+  def balance_tree(list, front, back, parent_root = nil)
     return nil if front > back
 
     mid = ((front + back) / 2).floor
-    root = Node.new(list[mid])
+    root = Node.new(list[mid], nil, nil, parent_root)
 
-    root.left = balance_tree(list, front, mid - 1)
-    root.right = balance_tree(list, mid + 1, back)
+    root.left = balance_tree(list, front, mid - 1, root)
+    root.right = balance_tree(list, mid + 1, back, root)
+    root.parent = parent_root
 
     root
+  end
+
+  def delete_leaf(data, node)
+    # If deleted node's value greater than parent's value
+    # set the parents' right connection to nil, else set the left to nil
+    compare_nodes(data, node.parent) ? node.parent.right = nil : node.parent.left = nil
+    node
+  end
+
+  def delete_node_with_child(data, node)
+    # If deleted node's value is greater than parent's value then
+    if compare_nodes(data, node.parent)
+      # Set the parent's right connection to the deleted node's child
+      node.parent.right = node.left.nil? ? node.right : node.left
+    else
+      # Set the parent's left connection to the deleted node's child
+      node.parent.left = node.left.nil? ? node.right : node.left
+    end
+
+    # Update the deleted node's child parent to the deleted node's parent
+    update_parent(node)
+    node
+  end
+
+  def delete_node_with_children(data, node)
+    # Get the next biggest data of the deleted node
+    next_biggest_node = get_next_biggest_node(data, node)
+
+    # Make a copy to return the deleted node
+    disposed_node = Node.new(data, node.left, node.right, node.parent)
+
+    # Delete the next biggest node (Since its a leaf, theres no changes)
+    deleted_next_biggest_node = delete_leaf(next_biggest_node.data, next_biggest_node)
+
+    # Use the deleted next biggest node's data to replace the value of this current node
+    node.data = deleted_next_biggest_node.data
+
+    disposed_node
+  end
+
+  def get_next_biggest_node(data, node)
+    inorder([], node) do |sel_node|
+      return sel_node if sel_node.data > data
+    end
+  end
+
+  def update_parent(node)
+    node.left.nil? ? node.right.parent = node.parent : node.left.parent = node.parent
   end
 end
