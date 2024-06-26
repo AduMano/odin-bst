@@ -180,7 +180,7 @@ class Tree
     return nil if node.nil?
 
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
-    puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
+    puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data.to_s.colorize(:yellow)}"
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
 
