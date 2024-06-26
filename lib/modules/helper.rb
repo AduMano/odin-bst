@@ -2,7 +2,7 @@
 
 # Helper Module
 module SortHelper
-  def merge(left, right) # rubocop:disable Metrics/MethodLength
+  def merge(left, right)
     merged = []
     i = j = 0
 

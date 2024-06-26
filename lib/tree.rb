@@ -105,11 +105,49 @@ class Tree
   end
 
   def find(data)
-    node = preorder do |node|
-      return node if node.data.eql?(data)
+    node = preorder do |current_node|
+      return current_node if current_node.data.eql?(data)
     end
 
     node.eql?(nil) ? false : node
+  end
+
+  # Iterative Approach
+  # def level_order(node = @root, queue = [], level_order_of_nodes = [])
+  #   return if node.nil?
+
+  #   queue.push(node)
+
+  #   until queue.empty?
+  #     current = queue[0]
+  #     block_given? ? yield(current) : level_order_of_nodes.push(current.data)
+
+  #     queue.push(current.left) unless current.left.nil?
+  #     queue.push(current.right) unless current.right.nil?
+
+  #     queue.shift
+  #   end
+
+  #   level_order_of_nodes unless block_given?
+  # end
+
+  # Recursive Approach
+  def level_order(node = @root, queue = [], level_order_of_nodes = [], &block)
+    return if node.nil?
+
+    queue.push(node) if queue.empty?
+
+    current = queue[0]
+    block_given? ? yield(current) : level_order_of_nodes.push(current.data)
+
+    queue.push(current.left) unless current.left.nil?
+    queue.push(current.right) unless current.right.nil?
+    queue.shift
+
+    level_order(node.left, queue, level_order_of_nodes, &block)
+    level_order(node.right, queue, level_order_of_nodes, &block)
+
+    level_order_of_nodes unless block_given?
   end
 
   def rebalance

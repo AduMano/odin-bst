@@ -104,3 +104,6 @@ tree.pretty_print
 puts "\nPre-Order: #{tree.preorder.to_s.colorize(:yellow)}"
 puts "In-Order: #{tree.inorder.to_s.colorize(:yellow)}"
 puts "Post-Order: #{tree.postorder.to_s.colorize(:yellow)}"
+
+puts "\n#{tree.level_order.to_s.colorize(:blue)}"
+tree.level_order { |node| puts node.data.to_s.colorize(:red) }
