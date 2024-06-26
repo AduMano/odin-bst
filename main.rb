@@ -106,4 +106,17 @@ puts "In-Order: #{tree.inorder.to_s.colorize(:yellow)}"
 puts "Post-Order: #{tree.postorder.to_s.colorize(:yellow)}"
 
 puts "\n#{tree.level_order.to_s.colorize(:blue)}"
-tree.level_order { |node| puts node.data.to_s.colorize(:red) }
+
+puts "Height: #{tree.height.to_s.colorize(:red)}"
+
+find_test = tree.find(4)
+print "\nFind 4: "
+puts find_test.to_s.colorize(:yellow)
+
+puts "Height: #{tree.height(find_test).to_s.colorize(:red)}"
+
+find_test = tree.find(5)
+print "\nFind 5: "
+puts find_test.to_s.colorize(:yellow)
+
+puts "Depth: #{tree.depth(find_test).to_s.colorize(:red)}"

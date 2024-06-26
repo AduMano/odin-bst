@@ -132,22 +132,37 @@ class Tree
   # end
 
   # Recursive Approach
-  def level_order(node = @root, queue = [], level_order_of_nodes = [], &block)
+  def level_order(node = @root, queue = [], level_order_of_nodes = [], level = 0, &block)
     return if node.nil?
 
     queue.push(node) if queue.empty?
 
     current = queue[0]
-    block_given? ? yield(current) : level_order_of_nodes.push(current.data)
+    block_given? ? yield(current, level, node) : level_order_of_nodes.push(current.data)
 
     queue.push(current.left) unless current.left.nil?
     queue.push(current.right) unless current.right.nil?
     queue.shift
 
-    level_order(node.left, queue, level_order_of_nodes, &block)
-    level_order(node.right, queue, level_order_of_nodes, &block)
+    level_order(node.left, queue, level_order_of_nodes, level + 1, &block)
+    level_order(node.right, queue, level_order_of_nodes, level + 1, &block)
 
     level_order_of_nodes unless block_given?
+  end
+
+  def depth(node = @root)
+    return nil if node.nil?
+
+    level_order { |_, level, current_node| return level if node.data.eql?(current_node.data) }
+  end
+
+  def height(node = @root)
+    return nil if node.nil?
+
+    height = 0
+    level_order(node) { |_, level| height = level if level > height }
+
+    height
   end
 
   def rebalance
@@ -157,7 +172,7 @@ class Tree
     true
   end
 
-  def pretty_print(node = @root, prefix = '', is_left = true) # rubocop:disable Style/OptionalBooleanParameter
+  def pretty_print(node = @root, prefix = '', is_left = true)
     return nil if node.nil?
 
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right

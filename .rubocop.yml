@@ -15,3 +15,7 @@ Metrics/MethodLength:
   Enabled: false
 Metrics/AbcSize:
   Max: 25
+Style/OptionalBooleanParameter:
+  Enabled: false
+Metrics/ParameterLists:
+  Enabled: false
