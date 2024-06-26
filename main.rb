@@ -120,3 +120,44 @@ print "\nFind 5: "
 puts find_test.to_s.colorize(:yellow)
 
 puts "Depth: #{tree.depth(find_test).to_s.colorize(:red)}"
+
+print "\nIs Balanced?: "
+puts tree.balanced?.to_s.colorize(:yellow)
+
+print "\ninsert(10): "
+puts tree.insert(10).to_s.colorize(:yellow)
+print "\ninsert(11): "
+puts tree.insert(11).to_s.colorize(:yellow)
+print 'insert(12): '
+puts tree.insert(12).to_s.colorize(:yellow)
+print 'insert(13): '
+puts tree.insert(13).to_s.colorize(:yellow)
+
+puts "\nTree: "
+tree.pretty_print
+
+puts "\nPre-Order: #{tree.preorder.to_s.colorize(:yellow)}"
+puts "In-Order: #{tree.inorder.to_s.colorize(:yellow)}"
+puts "Post-Order: #{tree.postorder.to_s.colorize(:yellow)}"
+
+puts "\nHeight: #{tree.height.to_s.colorize(:red)}"
+print 'Is Balanced?: '
+puts tree.balanced?.to_s.colorize(:yellow)
+
+print "\nBalancing.... "
+puts tree.rebalance.to_s.colorize(:yellow)
+
+puts "\nTree: "
+tree.pretty_print
+
+puts "\nPre-Order: #{tree.preorder.to_s.colorize(:yellow)}"
+puts "In-Order: #{tree.inorder.to_s.colorize(:yellow)}"
+puts "Post-Order: #{tree.postorder.to_s.colorize(:yellow)}"
+print 'Is Balanced?: '
+puts tree.balanced?.to_s.colorize(:yellow)
+
+print "\nDeleting Node with both Child (Node 10): "
+puts "Node #{tree.delete(10).data} deleted."
+
+puts "\nTree: "
+tree.pretty_print

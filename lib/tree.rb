@@ -51,15 +51,12 @@ class Tree
 
     if node.left.nil? && node.right.nil?
       # If its a leaf node (No Children or Nil nodes for left and right)
-      puts 'With 0 Child'.colorize(:red)
       delete_leaf(data, node)
     elsif node.left.nil? ^ node.right.nil?
       # If theres only one child (exclusive or, cant be both true)
-      puts 'With 1 Child'.colorize(:red)
       delete_node_with_child(data, node)
     else
       # If node has children both side
-      puts 'With 2 Child'.colorize(:red)
       delete_node_with_children(data, node)
     end
   end
@@ -113,14 +110,14 @@ class Tree
   end
 
   # Iterative Approach
-  # def level_order(node = @root, queue = [], level_order_of_nodes = [])
+  # def level_order(node = @root, queue = [], level_order_of_nodes = [], level = 0, &block)
   #   return if node.nil?
 
   #   queue.push(node)
 
   #   until queue.empty?
   #     current = queue[0]
-  #     block_given? ? yield(current) : level_order_of_nodes.push(current.data)
+  #     block_given? ? yield(current, level, node) : level_order_of_nodes.push(current.data)
 
   #     queue.push(current.left) unless current.left.nil?
   #     queue.push(current.right) unless current.right.nil?
@@ -163,6 +160,13 @@ class Tree
     level_order(node) { |_, level| height = level if level > height }
 
     height
+  end
+
+  def balanced?
+    left = height(@root.left)
+    right = height(@root.right)
+
+    (left - right).abs <= 1
   end
 
   def rebalance
