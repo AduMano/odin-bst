@@ -49,3 +49,84 @@
   6. Balance the tree by calling #rebalance
   7. Confirm that the tree is balanced by calling #balanced?
   8. Print out all elements in level, pre, post, and in order.
+
+# OUTPUT DRIVER SCRIPT:
+```Ruby
+List: [1, 97, 54, 46, 63, 1, 60, 73, 25, 90, 1, 67, 8, 66, 64]
+Tree: 
+│           ┌── 97
+│       ┌── 90
+│       │   └── 73
+│   ┌── 67
+│   │   │   ┌── 66
+│   │   └── 64
+└── 63
+    │       ┌── 60
+    │   ┌── 54
+    │   │   └── 46
+    └── 25
+        │   ┌── 8
+        └── 1
+
+Is the Tree balanced? true
+
+Pre-Order: [63, 25, 1, 8, 54, 46, 60, 67, 64, 66, 90, 73, 97]
+Post-Order: [8, 1, 46, 60, 54, 25, 66, 64, 73, 97, 90, 67, 63]
+In-Order: [1, 8, 25, 46, 54, 60, 63, 64, 66, 67, 73, 90, 97]
+
+Insert Node (143): #<Node:0x00007bbb38dc3678>
+Insert Node (117): #<Node:0x00007bbb38dc3178>
+Insert Node (138): #<Node:0x00007bbb38dc2cc8>
+Insert Node (144): #<Node:0x00007bbb38dc23b8>
+Insert Node (124): #<Node:0x00007bbb38dc1e68>
+
+Tree: 
+│                   ┌── 144
+│               ┌── 143
+│               │   │   ┌── 138
+│               │   │   │   └── 124
+│               │   └── 117
+│           ┌── 97
+│       ┌── 90
+│       │   └── 73
+│   ┌── 67
+│   │   │   ┌── 66
+│   │   └── 64
+└── 63
+    │       ┌── 60
+    │   ┌── 54
+    │   │   └── 46
+    └── 25
+        │   ┌── 8
+        └── 1
+
+Is the Tree balanced? false
+
+Balancing..... true
+
+Tree: 
+│               ┌── 144
+│           ┌── 143
+│       ┌── 138
+│       │   └── 124
+│   ┌── 117
+│   │   │       ┌── 97
+│   │   │   ┌── 90
+│   │   └── 73
+│   │       └── 67
+└── 66
+    │           ┌── 64
+    │       ┌── 63
+    │   ┌── 60
+    │   │   └── 54
+    └── 46
+        │   ┌── 25
+        └── 8
+            └── 1
+
+Is the Tree balanced? true
+
+Pre-Order: [66, 46, 8, 1, 25, 60, 54, 63, 64, 117, 73, 67, 90, 97, 138, 124, 143, 144]
+Post-Order: [1, 25, 8, 54, 64, 63, 60, 46, 67, 97, 90, 73, 124, 144, 143, 138, 117, 66]
+In-Order: [1, 8, 25, 46, 54, 60, 63, 64, 66, 67, 73, 90, 97, 117, 124, 138, 143, 144]
+```
